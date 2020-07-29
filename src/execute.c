@@ -7,11 +7,12 @@ void execute(char **argv, char **env)
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-		execvp(argv[0], argv);
+		if (execvp(argv[0], argv) == -1)
+			perror("permission dined");
 		exit(0);
 	}
 	else if (child_pid < 0)
-		exit(1);
+		perror("failed to fork");
 	else
-		wait(NULL);
+		wait(&child_pid);
 }

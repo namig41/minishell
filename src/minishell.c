@@ -1,53 +1,54 @@
 #include "minishell.h"
+#include <stdio.h>
 
-extern char *commands_str[];
+extern char *cmd[];
+extern char *m_cmd[];
+extern void (*cmd_func[])(char **argv, char **env);
 
-static int search_command(char *command_name)
+
+static int search_command(char **cmd, char ***argc)
 {
+	int index;
 	size_t i;
 
 	i = 0;
-	while (commands_str[i])
+	while (argc[i])
 	{
-		if (ft_strequ(commands_str[i], command_name))
-			return (1);
+		if ((index = belongs_set(cmd, argc[i][0])) != -1)
+			return (index);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
-static void parse_command(char **argv, char **env)
+static void parse_command(char ***argc, char **env)
 {
-	if (ft_strequ(argv[0], "env"))
-		cmd_env(argv, env);
-	else if (ft_strequ(argv[0], "cd"))
-		cmd_cd(argv, env);
-	else if (ft_strequ(argv[0], "exit"))
-		cmd_exit(argv, env);
-	else if (ft_strequ(argv[0], "pwd"))
-		cmd_pwd(argv, env);
-	else if (ft_strequ(argv[0], "help"))
-		cmd_help(argv, env);
-	else if (search_command(argv[0]))
-		execute(argv, env);
+	size_t i;
+	int index;
+
+	i = 0;
+	if ((index = search_command(m_cmd, argc)) != -1)
+		cmd_func[index](argc[0], env);
+	else if (search_command(cmd, argc) != -1)
+		execute(argc[0], env);
 	else 
 	{
-		ft_putstr(argv[0]);
-		ft_putendl(": command not found");
+		ft_puterror(argc[i][0]);
+		ft_puterror(": command not found\n");
 	}
 }
 
 void 	minishell(char **argv, char **env)
 {
 	char *line;
-	char **cmd;
+	char ***cmd;
 	
 	while (1)
 	{
 		ft_putstr("> ");
 		if (get_next_line(STDIN_FILENO, &line) < 0)
 			exit(1);
-		cmd = ft_strsplit(line, ' ');
+		cmd = parse_line(line);
 		parse_command(cmd, env);
 		ft_memdel((void **)&line);
 	}

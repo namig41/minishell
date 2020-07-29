@@ -14,7 +14,8 @@ FILE_MINISHELL 	= \
 					main \
 					minishell \
 					execute \
-					commands
+					commands \
+					parser \
 
 FILE_BUILTINS 	= \
 				  	cmd_env \

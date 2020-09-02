@@ -65,9 +65,11 @@ void 	minishell(char **argv, char **env)
 	char *line;
 	char **cmd;
 	
+	current_path();
 	while (1)
 	{
-		ft_putstr("> ");
+		ft_putstr(path);
+		ft_putstr(">");
 		if (get_next_line(STDIN_FILENO, &line) < 0)
 			exit(1);
 		cmd = ft_strsplit(line, ' ');

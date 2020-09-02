@@ -6,7 +6,7 @@
 /*   By: lcarmelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 13:50:06 by lcarmelo          #+#    #+#             */
-/*   Updated: 2020/09/02 14:24:07 by lcarmelo         ###   ########.fr       */
+/*   Updated: 2020/09/02 15:43:38 by lcarmelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,18 @@ void 	cmd_exit(char **argv, char **env);
 
 /*--------------------------------- ERRORS --------------------------*/
 
-void ft_puterror(const char *s);
+void 	ft_puterror(const char *s);
 
 /*--------------------------------- GLOBALS --------------------------*/
 
+void 	current_path(void);
+
+/*--------------------------------- GLOBALS --------------------------*/
+
+extern char *path;
 extern char *cmd[];
 extern char *m_cmd[];
+extern char *cmd_sep[];
 extern void (*cmd_func[])(char **argv, char **env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lcarmelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 13:56:18 by lcarmelo          #+#    #+#             */
-/*   Updated: 2020/09/02 13:56:18 by lcarmelo         ###   ########.fr       */
+/*   Updated: 2020/09/02 15:28:54 by lcarmelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ void 	cmd_env(char **argv, char **env)
 		ft_putendl(env[i]);
 		i++;
 	}
+	(void)argv;
 }

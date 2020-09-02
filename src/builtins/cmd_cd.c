@@ -6,7 +6,7 @@
 /*   By: lcarmelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 13:56:09 by lcarmelo          #+#    #+#             */
-/*   Updated: 2020/09/02 13:56:10 by lcarmelo         ###   ########.fr       */
+/*   Updated: 2020/09/02 15:45:27 by lcarmelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ void 	cmd_cd(char **argv, char **env)
 	{
 		if (chdir(argv[1]) != 0)
 			ft_putendl("Error");
+		current_path();
 	}
 }

@@ -6,11 +6,13 @@
 /*   By: lcarmelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 13:50:15 by lcarmelo          #+#    #+#             */
-/*   Updated: 2020/09/02 13:58:20 by lcarmelo         ###   ########.fr       */
+/*   Updated: 2020/09/02 15:44:00 by lcarmelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char *path = NULL;
 
 char *m_cmd[] = {
 	"cd",
@@ -28,7 +30,7 @@ char *cmd[] = {
 	NULL
 };
 
-char *shell_sep[] = {
+char *cmd_sep[] = {
 	"|",
 	">",
 	">>",

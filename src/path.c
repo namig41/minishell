@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_pwd.c                                          :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcarmelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/02 13:56:28 by lcarmelo          #+#    #+#             */
-/*   Updated: 2020/09/02 15:34:16 by lcarmelo         ###   ########.fr       */
+/*   Created: 2020/09/02 15:41:05 by lcarmelo          #+#    #+#             */
+/*   Updated: 2020/09/02 15:44:55 by lcarmelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "minishell.h"
 
-void 	cmd_pwd(char **argv, char **env)
+void 	current_path(void)
 {
 	char	buf[PATH_MAX + 1];
 
-	ft_putendl(getcwd(buf, PATH_MAX));
+	getcwd(buf, PATH_MAX);
+	ft_memdel((void **)&path);
+	path = ft_strdup(buf);
 }

@@ -6,7 +6,7 @@
 #    By: lcarmelo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/13 19:35:02 by lcarmelo          #+#    #+#              #
-#    Updated: 2020/09/02 14:25:25 by lcarmelo         ###   ########.fr        #
+#    Updated: 2020/09/02 15:46:35 by lcarmelo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ FILE_MINISHELL 	= \
 					minishell \
 					execute \
 					commands \
-					error
+					error \
+					path
 
 FILE_BUILTINS 	= \
 				  	cmd_env \

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lcarmelo <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/02 13:50:06 by lcarmelo          #+#    #+#             */
+/*   Updated: 2020/09/02 14:24:07 by lcarmelo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -11,6 +23,7 @@
 
 # include "libft.h"
 # include "vector.h"
+# include "get_next_line.h"
 
 /*--------------------------------- MINISHELL -----------------------*/
 
@@ -34,8 +47,14 @@ void 	cmd_help(char **argv, char **env);
 void 	cmd_exit(char **argv, char **env);
 
 
-/*--------------------------------- COMMANDS --------------------------*/
+/*--------------------------------- ERRORS --------------------------*/
 
 void ft_puterror(const char *s);
+
+/*--------------------------------- GLOBALS --------------------------*/
+
+extern char *cmd[];
+extern char *m_cmd[];
+extern void (*cmd_func[])(char **argv, char **env);
 
 #endif

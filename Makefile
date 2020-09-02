@@ -6,7 +6,7 @@
 #    By: lcarmelo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/13 19:35:02 by lcarmelo          #+#    #+#              #
-#    Updated: 2020/03/14 16:53:49 by lcarmelo         ###   ########.fr        #
+#    Updated: 2020/09/02 14:25:25 by lcarmelo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ FILE_MINISHELL 	= \
 					minishell \
 					execute \
 					commands \
-					parser \
+					error
 
 FILE_BUILTINS 	= \
 				  	cmd_env \
@@ -28,14 +28,11 @@ DIR_SRC			= ./src/
 DIR_BUILT 		= ./src/builtins/
 DIR_INC			= ./includes/
 DIR_LIB			= ./libft/
-
-SRC_MINISHELL 	= \
-					$(addprefix $(DIR_SRC), $(addsuffix .c, $(FILE_MINISHELL))) \
-					$(addprefix $(DIR_BUILT), $(addsuffix .c, $(FILE_BUILTINS)))
+DIR_OBJ 		= ./obj/
 
 OBJ_MINISHELL 	= \
-				  	$(addsuffix .o, $(FILE_MINISHELL)) \
-				  	$(addsuffix .o, $(FILE_BUILTINS))
+				  	$(addprefix $(DIR_OBJ), $(addsuffix .o, $(FILE_MINISHELL))) \
+				  	$(addprefix $(DIR_OBJ), $(addsuffix .o, $(FILE_BUILTINS)))
 
 CC 	   			= gcc
 MINISHELL 		= minishell
@@ -46,27 +43,28 @@ all: minishell
 
 lib:
 	@make -C $(DIR_LIB)
-	@cp libft/libft.a ./
 
-obj:
-	@$(CC) $(CFLAGS) -c $(SRC_MINISHELL)
+$(DIR_OBJ):
+	@mkdir -p $(DIR_OBJ)
 
-minishell: lib obj
-	@$(CC) $(CFLAGS) -o $(MINISHELL) $(OBJ_MINISHELL) libft/libft.a
+minishell: $(DIR_OBJ) $(OBJ_MINISHELL) lib 
+	@$(CC) $(CFLAGS) -o $(MINISHELL) $(OBJ_MINISHELL) $(DIR_LIB)libft.a
 
+$(DIR_OBJ)%.o: $(DIR_SRC)%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+ 
+$(DIR_OBJ)%.o: $(DIR_BUILT)%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+ 
 clean:
 	@make clean -C $(DIR_LIB)
-	@rm -f $(OBJ_MINISHELL)
-	@rm -f libft.a
+	@rm -rf $(DIR_OBJ)
 
 fclean: clean
 	@make fclean -C $(DIR_LIB)
-	@rm -f $(MINISHELL)
+	@rm -f $(PUSH_SWAP)
+	@rm -f $(CHECKER)
 
 re: fclean all
 
-compile: re
-	@clear
-	./$(MINISHELL)
-
-.PHONY: all clean fclean re compile
+.PHONY: all clean fclean re

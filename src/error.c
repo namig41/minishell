@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_env.c                                          :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcarmelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/02 13:56:18 by lcarmelo          #+#    #+#             */
-/*   Updated: 2020/09/02 13:56:18 by lcarmelo         ###   ########.fr       */
+/*   Created: 2020/09/02 14:22:47 by lcarmelo          #+#    #+#             */
+/*   Updated: 2020/09/02 14:29:32 by lcarmelo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "minishell.h"
 
-void 	cmd_env(char **argv, char **env)
+void ft_puterror(const char *s)
 {
-	size_t i;
-
-	i = 0;
-	while (env[i])
-	{
-		ft_putendl(env[i]);
-		i++;
-	}
+	ft_putendl_fd(s, STDERR_FILENO);
 }

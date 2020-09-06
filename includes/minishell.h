@@ -25,6 +25,8 @@
 # include "vector.h"
 # include "get_next_line.h"
 
+# define CLEAR_SCREEN "\033[?1049h\033[H"
+
 /*
 ** ---------------------- MINISHELL ---------------------------------
 */
@@ -55,6 +57,8 @@ void 	cmd_env(char **argv, char **env);
 void 	cmd_pwd(char **argv, char **env);
 void 	cmd_help(char **argv, char **env);
 void 	cmd_exit(char **argv, char **env);
+void 	cmd_clear(char **argv, char **env);
+void 	cmd_echo(char **argv, char **env);
 
 
 /*
@@ -75,7 +79,6 @@ void 	current_path(void);
 
 extern char *path;
 extern char *cmd[];
-extern char *m_cmd[];
 extern char *cmd_sep[];
 extern void (*cmd_func[])(char **argv, char **env);
 

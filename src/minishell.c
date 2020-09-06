@@ -12,18 +12,6 @@
 
 #include "minishell.h"
 
-void		array_clear(char **array)
-{
-	size_t i;
-
-	i = 0;
-	if (!array)
-		return ;
-	while (array[i])
-		ft_memdel((void **)&array[i++]);
-	ft_memdel((void **)&array);
-}
-
 static int search_command(char **cmd, char **argc)
 {
 	int index;
@@ -46,18 +34,12 @@ static int search_command(char **cmd, char **argc)
 
 static void parse_command(char **argc, char **env)
 {
-	size_t i;
 	int index;
 
-	if ((index = search_command(m_cmd, argc)) != -1)
+	if ((index = search_command(cmd, argc)) != -1)
 		cmd_func[index](argc, env);
-	else if (search_command(cmd, argc) != -1)
-		execute(argc, env);
 	else 
-	{
-		ft_puterror(argc[0]);
-		ft_puterror(": command not found\n");
-	}
+		execute(argc, env);
 }
 
 void 	minishell(char **argv, char **env)
@@ -74,7 +56,7 @@ void 	minishell(char **argv, char **env)
 			exit(1);
 		cmd = ft_strsplit(line, ' ');
 		parse_command(cmd, env);
-		array_clear(cmd);
+		ft_strsplit_clear(cmd);
 		ft_memdel((void **)&line);
 	}
 }

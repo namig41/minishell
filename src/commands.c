@@ -14,20 +14,15 @@
 
 char *path = NULL;
 
-char *m_cmd[] = {
+char *cmd[] = {
 	"cd",
 	"env", 
 	"help",
 	"pwd",
+	"clear",
+	"echo",
 	"exit",
   	NULL
-};
-
-char *cmd[] = {
-	"ls",
-	"man",
-	"clear",
-	NULL
 };
 
 char *cmd_sep[] = {
@@ -47,6 +42,8 @@ void (*cmd_func[])(char **args, char **env) = {
 	&cmd_env,
 	&cmd_help,
 	&cmd_pwd,
+	&cmd_clear,
+	&cmd_echo,
 	&cmd_exit,
 	NULL
 };

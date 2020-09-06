@@ -20,11 +20,13 @@ void execute(char **argv, char **env)
 	if (child_pid == 0)
 	{
 		if (execvp(argv[0], argv) == -1)
-			perror("permission dined");
-		exit(0);
+		{
+			ft_putstr_fd(argv[0], STDERR_FILENO);
+			ft_puterror(": command not found\n");
+		}
 	}
 	else if (child_pid < 0)
-		perror("failed to fork");
+		ft_puterror("failed to fork");
 	else
 		wait(&child_pid);
 }

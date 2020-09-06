@@ -18,9 +18,9 @@ void 	cmd_help(char **argv, char **env)
 	size_t i;	
 
 	i = 0;
-	while (m_cmd[i])
+	while (cmd[i])
 	{
-		ft_putendl(m_cmd[i]);
+		ft_putendl(cmd[i]);
 		i++;
 	}
 }

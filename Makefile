@@ -15,7 +15,6 @@ FILE_MINISHELL 	= \
 					minishell \
 					execute \
 					commands \
-					error \
 					path
 
 FILE_BUILTINS 	= \
@@ -23,7 +22,9 @@ FILE_BUILTINS 	= \
 				  	cmd_exit \
 					cmd_pwd \
 					cmd_cd \
-					cmd_help
+					cmd_help \
+					cmd_clear \
+					cmd_echo
 
 DIR_SRC			= ./src/
 DIR_BUILT 		= ./src/builtins/

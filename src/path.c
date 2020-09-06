@@ -16,8 +16,9 @@
 void 	current_path(void)
 {
 	char	buf[PATH_MAX + 1];
+	char 	*path;
 
-	getcwd(buf, PATH_MAX);
-	ft_memdel((void **)&path);
-	path = ft_strdup(buf);
+	path = getcwd(buf, PATH_MAX);
+	ft_putstr(path);
+	ft_putchar('>');
 }

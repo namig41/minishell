@@ -77,7 +77,6 @@ void 	current_path(void);
 ** ---------------------- GLOBALS -------------------------------
 */
 
-extern char *path;
 extern char *cmd[];
 extern char *cmd_sep[];
 extern void (*cmd_func[])(char **argv, char **env);

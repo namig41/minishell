@@ -15,7 +15,8 @@ FILE_MINISHELL 	= \
 					minishell \
 					execute \
 					commands \
-					path
+					path \
+					env
 
 FILE_BUILTINS 	= \
 				  	cmd_env \
@@ -24,7 +25,8 @@ FILE_BUILTINS 	= \
 					cmd_cd \
 					cmd_help \
 					cmd_clear \
-					cmd_echo
+					cmd_echo \
+					cmd_setenv
 
 DIR_SRC			= ./src/
 DIR_BUILT 		= ./src/builtins/
@@ -63,9 +65,7 @@ clean:
 	@rm -rf $(DIR_OBJ)
 
 fclean: clean
-	@make fclean -C $(DIR_LIB)
-	@rm -f $(PUSH_SWAP)
-	@rm -f $(CHECKER)
+	@rm -rf $(MINISHELL)
 
 re: fclean all
 

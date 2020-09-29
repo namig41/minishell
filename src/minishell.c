@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcarmelo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/02 13:50:26 by lcarmelo          #+#    #+#             */
+/*   Created: 2020/09/02 13:49:55 by lcarmelo          #+#    #+#             */
+/*   Updated: 2020/09/02 13:50:01 by lcarmelo         ###   ########.fr       */
 /*                                                                            */
-/*   Updated: 2020/09/02 13:53:52 by lcarmelo         ###   ########.fr       */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 
 static int search_command(char **cmd, char **argc)
 {
@@ -51,7 +52,10 @@ void 	minishell(char **argv, char **env)
 	{
 		current_path();
 		if (get_next_line(STDIN_FILENO, &line) < 0)
+		{
+			clear_env(env);
 			exit(1);
+		}
 		cmd = ft_strsplit(line, ' ');
 		parse_command(cmd, env);
 		ft_strsplit_clear(cmd);

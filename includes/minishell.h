@@ -35,7 +35,14 @@
 void 	minishell(char **argv, char **env);
 
 /*
-** ---------------------- PARSE ---------------------------------
+** ---------------------- ENV ---------------------------------------
+*/
+
+void 	create_env(char ***env);
+void 	clear_env(char **env);
+
+/*
+** ---------------------- PARSE -------------------------------------
 */
 
 int 	belongs_set(char **set, char *el);
@@ -48,7 +55,7 @@ int 	belongs_set(char **set, char *el);
 void 	execute(char **argv, char **env);
 
 /*
-** ---------------------- COMMADS ---------------------------------
+** ---------------------- COMMANDS ---------------------------------
 */
 
 
@@ -59,10 +66,11 @@ void 	cmd_help(char **argv, char **env);
 void 	cmd_exit(char **argv, char **env);
 void 	cmd_clear(char **argv, char **env);
 void 	cmd_echo(char **argv, char **env);
+void 	cmd_setenv(char **argv, char **env);
 
 
 /*
-** ---------------------- ERROR --j--------------------------------
+** ---------------------- ERROR ----------------------------------
 */
 
 void 	ft_puterror(const char *s);

@@ -16,6 +16,7 @@
 int main(int argc, char *argv[], char *env[])
 {
 	(void)argc;
+	create_env(&env);
 	minishell(argv, env);
 	return (0);
 }

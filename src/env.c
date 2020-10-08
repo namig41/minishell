@@ -13,6 +13,18 @@
 
 #include "minishell.h"
 
+void clear_env(char ***env)
+{
+	size_t i;
+
+	i = 0;
+	if (!env && !*env)
+		return ;
+	while ((*env)[i])
+		ft_memdel((void **)&(*env)[i++]);
+	ft_memdel((void **)&(*env));
+}
+
 void create_env(char ***env)
 {
 	char **e;
@@ -21,7 +33,11 @@ void create_env(char ***env)
 	i = -1;
 	while ((*env)[++i])
 		;
-	e = (char **)malloc(sizeof(char *) * (i + 1));
+	if (!(e = (char **)malloc(sizeof(char *) * (i + 1))))
+	{
+		ft_puterror("alloc error");
+		exit(1);
+	}
 	i = -1;
 	while ((*env)[++i])
 		e[i] = ft_strdup((*env)[i]);
@@ -29,7 +45,3 @@ void create_env(char ***env)
 	*env = e;
 }
 
-void clear_env(char **env)
-{
-	ft_strsplit_clear(env);
-}

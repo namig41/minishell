@@ -39,7 +39,7 @@ void 	minishell(char **argv, char **env);
 */
 
 void 	create_env(char ***env);
-void 	clear_env(char **env);
+void 	clear_env(char ***env);
 
 /*
 ** ---------------------- PARSE -------------------------------------

@@ -15,7 +15,7 @@
 void 	cmd_cd(char **argv, char **env)
 {
 	if (!argv[1])
-	    ft_puterror("lsh: ожидается аргумент для \"cd\"\n");
+	    ft_puterror("Error");
 	else
 	{
 		if (chdir(argv[1]) != 0)

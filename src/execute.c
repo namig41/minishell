@@ -22,7 +22,7 @@ void execute(char **argv, char **env)
 		if (execvp(argv[0], argv) == -1)
 		{
 			ft_putstr_fd(argv[0], STDERR_FILENO);
-			ft_puterror(": command not found\n");
+			ft_puterror(": command not found");
 		}
 	}
 	else if (child_pid < 0)

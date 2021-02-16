@@ -5,7 +5,7 @@
 ### Instructions
 
 - You must program a *mini UNIX command interpreter*.
-- This interpreter must display a prompt (a simple `$> ` for example)
+- This interpreter must display a prompt (a simple `> ` for example)
   and wait till you type a command line, validated by pressing enter.
 - The prompt is shown again only once the command has been completely executed.
 - The command lines are simple, no pipes, no redirections

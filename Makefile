@@ -26,7 +26,8 @@ FILE_BUILTINS 	= \
 					cmd_help \
 					cmd_clear \
 					cmd_echo \
-					cmd_setenv
+					cmd_setenv \
+					cmd_eval
 
 DIR_SRC			= ./src/
 DIR_BUILT 		= ./src/builtins/
@@ -41,7 +42,7 @@ OBJ_MINISHELL 	= \
 CC 	   			= gcc
 MINISHELL 		= minishell
 #CFLAGS 	   		= -Wall -Werror -Wextra -O2 -I$(DIR_INC) -I$(DIR_LIB)$(DIR_INC)
-CFLAGS 	   		=  -O2 -I$(DIR_INC) -I$(DIR_LIB)$(DIR_INC)
+CFLAGS 	   		=  -O2 -g -I$(DIR_INC) -I$(DIR_LIB)$(DIR_INC)
 
 all: minishell
 

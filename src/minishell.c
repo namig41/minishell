@@ -12,48 +12,50 @@
 
 #include "minishell.h"
 
-
 static int search_command(char **cmd, char **argc)
 {
-	int index;
-	size_t i;
+    int j;
+    size_t i;
 
 	i = 0;
 	while (argc[i])
 	{
-		index = 0;
-		while (cmd[index])
+        j = 0;
+        while (cmd[j])
 		{
-			if (ft_strequ(cmd[index], argc[i]))
-				return (index);
-			index++;
+            if (ft_strequ(cmd[j], argc[i]))
+                return (j);
+            j++;
 		}
 		i++;
 	}
 	return (-1);
 }
 
-static void parse_command(char **argc, char **env)
+static void parse_command(char **argc, char ***env)
 {
-	int index;
+    int i;
 
-	if ((index = search_command(cmd, argc)) != -1)
-		cmd_func[index](argc, env);
+    if ((i = search_command(cmd, argc)) != -1)
+        cmd_func[i](argc, *env);
+    else if (cmd_setenv(argc, env))
+        ;
 	else 
-		execute(argc, env);
+        execute(argc, *env);
 }
 
-void 	minishell(char **argv, char **env)
+void 	minishell(char **argv, char ***env)
 {
 	char *line;
 	char **cmd;
 	
+    (void)argv;
 	while (1)
 	{
 		current_path();
 		if (get_next_line(STDIN_FILENO, &line) < 0)
 		{
-			clear_env(env);
+            clear_env(env);
 			exit(1);
 		}
 		cmd = ft_strsplit(line, ' ');

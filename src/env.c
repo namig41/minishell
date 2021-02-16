@@ -1,4 +1,3 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -25,15 +24,22 @@ void clear_env(char ***env)
 	ft_memdel((void **)&(*env));
 }
 
+static int get_env_len(char **env)
+{
+    int len;
+
+    len = -1;
+    while (env[++len])
+        ;
+    return len;
+}
+
 void create_env(char ***env)
 {
 	char **e;
-	int i;
+    int i;
 
-	i = -1;
-	while ((*env)[++i])
-		;
-	if (!(e = (char **)malloc(sizeof(char *) * (i + 1))))
+    if (!(e = (char **)malloc(sizeof(char *) * (get_env_len(*env) + 1))))
 	{
 		ft_puterror("alloc error");
 		exit(1);
@@ -45,3 +51,21 @@ void create_env(char ***env)
 	*env = e;
 }
 
+void add_new_env(char ***env, char *new_env)
+{
+    char **e;
+    int i;
+
+    i = -1;
+    if (!(e = (char **)malloc(sizeof(char *) * (get_env_len(*env) + 2))))
+    {
+        ft_puterror("alloc error");
+        exit(1);
+    }
+    while ((*env)[++i])
+        e[i] = ft_strdup((*env)[i]);
+    clear_env(env);
+    e[i] = ft_strdup(new_env);
+    e[i + 1] = 0;
+    *env = e;
+}

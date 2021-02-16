@@ -24,6 +24,7 @@
 # include "libft.h"
 # include "vector.h"
 # include "get_next_line.h"
+# include "stack.h"
 
 # define CLEAR_SCREEN "\033[?1049h\033[H"
 
@@ -32,13 +33,14 @@
 */
 
 
-void 	minishell(char **argv, char **env);
+void 	minishell(char **argv, char ***env);
 
 /*
 ** ---------------------- ENV ---------------------------------------
 */
 
 void 	create_env(char ***env);
+void	add_new_env(char ***env, char *new_env);
 void 	clear_env(char ***env);
 
 /*
@@ -50,7 +52,6 @@ int 	belongs_set(char **set, char *el);
 /*
 ** ---------------------- SYSCALL ---------------------------------
 */
-
 
 void 	execute(char **argv, char **env);
 
@@ -66,8 +67,8 @@ void 	cmd_help(char **argv, char **env);
 void 	cmd_exit(char **argv, char **env);
 void 	cmd_clear(char **argv, char **env);
 void 	cmd_echo(char **argv, char **env);
-void 	cmd_setenv(char **argv, char **env);
-
+void	cmd_eval(char **argv, char **env);
+int 	cmd_setenv(char **argv, char ***env);
 
 /*
 ** ---------------------- ERROR ----------------------------------

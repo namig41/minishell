@@ -16,7 +16,7 @@ static int check_env(char *var)
 {
 	if (var[0] == '$')
 	{
-		ft_putstr((char *)getenv(var[0]));
+        ft_putstr((char *)getenv(var + 1));
 		return (1);
 	}
 	return (0);
@@ -46,7 +46,7 @@ void 	cmd_echo(char **argv, char **env)
 	i = 1;
 	while (argv[i])
 	{
-		if (!check_env(argv[i]))	
+        if (!check_env(argv[i]))
 			put_echo(argv[i]);
 		ft_putchar(' ');
 		i++;

@@ -21,6 +21,7 @@ char *cmd[] = {
 	"pwd",
 	"clear",
 	"echo",
+    "eval",
 	"exit",
   	NULL
 };
@@ -44,6 +45,7 @@ void (*cmd_func[])(char **args, char **env) = {
 	&cmd_pwd,
 	&cmd_clear,
 	&cmd_echo,
-	&cmd_exit,
-	NULL
+    &cmd_eval,
+    &cmd_exit,
+    NULL
 };

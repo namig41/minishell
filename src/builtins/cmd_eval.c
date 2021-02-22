@@ -124,6 +124,7 @@ void 	cmd_eval(char **argc, char **env)
     int *res = stack_pop(&operands);
     char *s_res = ft_itoa(*res);
     ft_putendl(s_res);
+    ft_memdel((void **)&s_res);
     stack_destroy(&operands);
     stack_destroy(&operations);
 }

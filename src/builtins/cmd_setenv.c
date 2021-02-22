@@ -34,7 +34,6 @@ int 	cmd_setenv(char **argv, char ***env)
             }
             i++;
         }
-
         if (assig == 0 || assig == i)
             return 0;
         add_new_env(env, argv[0]);

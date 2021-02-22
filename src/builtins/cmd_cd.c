@@ -14,11 +14,12 @@
 
 void 	cmd_cd(char **argv, char **env)
 {
+    (void)env;
 	if (!argv[1])
-	    ft_puterror("Error");
+        ft_puterror("Not path");
 	else
 	{
 		if (chdir(argv[1]) != 0)
-			ft_puterror("Error");
+            ft_puterror("Path don't found");
 	}
 }

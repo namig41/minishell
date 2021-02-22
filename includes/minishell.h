@@ -83,8 +83,24 @@ void 	ft_puterror(const char *s);
 void 	current_path(void);
 
 /*
+** ---------------------- LONG ARITHMETIC -------------------------
+*/
+
+char	*plus(char *a, char *b);
+char	*minus(char *a, char *b);
+char    *mult(char *a, char *b);
+char	*sdiv(char *a, char *b);
+
+/*
+** ---------------------- PARSER -------------------------------
+*/
+
+void parse_line(char *line, char ***env);
+
+/*
 ** ---------------------- GLOBALS -------------------------------
 */
+
 
 extern char *cmd[];
 extern char *cmd_sep[];

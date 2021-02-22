@@ -12,44 +12,41 @@
 
 #include "minishell.h"
 
-static int check_env(char *var)
+static int check_env(char *var, int fd)
 {
 	if (var[0] == '$')
 	{
-        ft_putstr((char *)getenv(var + 1));
+        ft_putstr_fd((char *)getenv(var + 1), fd);
 		return (1);
 	}
 	return (0);
 }
 
-static void put_echo(const char *s)
+static void put_echo(const char *s, int fd)
 {
 	size_t i;
 
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == 34 || s[i] == 39)
-		{
-			i++;
-			continue ;
-		}
-		ft_putchar(s[i]);
+        if (s[i] != 34 && s[i] != 39)
+            ft_putchar_fd(s[i], fd);
 		i++;
 	}
 }
 
-void 	cmd_echo(char **argv, char **env)
+void 	cmd_echo(char **argv, char **env, int fd)
 {
 	size_t i;
 
 	i = 1;
+    (void)env;
 	while (argv[i])
 	{
-        if (!check_env(argv[i]))
-			put_echo(argv[i]);
-		ft_putchar(' ');
+        if (!check_env(argv[i], fd))
+            put_echo(argv[i], fd);
+        ft_putchar_fd(' ', fd);
 		i++;
 	}
-	ft_putchar('\n');
+    ft_putchar_fd('\n', fd);
 }

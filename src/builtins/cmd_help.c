@@ -13,14 +13,16 @@
 
 #include "minishell.h"
 
-void 	cmd_help(char **argv, char **env)
+void 	cmd_help(char **argv, char **env, int fd)
 {
 	size_t i;	
 
 	i = 0;
+    (void)argv;
+    (void)env;
 	while (cmd[i])
 	{
-		ft_putendl(cmd[i]);
+        ft_putendl_fd(cmd[i], fd);
 		i++;
 	}
 }

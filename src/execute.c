@@ -17,6 +17,7 @@ void execute(char **argv, char **env)
 	pid_t child_pid;
 
 	child_pid = fork();
+    (void)env;
 	if (child_pid == 0)
 	{
 		if (execvp(argv[0], argv) == -1)

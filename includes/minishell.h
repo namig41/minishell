@@ -16,10 +16,11 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include <fcntl.h>
+# include <dirent.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
-# include <dirent.h>
 
 # include "libft.h"
 # include "vector.h"
@@ -27,6 +28,14 @@
 # include "stack.h"
 
 # define CLEAR_SCREEN "\033[?1049h\033[H"
+
+typedef enum e_sep
+{
+    SEP_PIPE,
+    SEP_REDIRECT,
+    SEP_REDIRECT_ADD,
+    SEP_CONTINUE
+}           t_sep;
 
 /*
 ** ---------------------- MINISHELL ---------------------------------
@@ -60,15 +69,15 @@ void 	execute(char **argv, char **env);
 */
 
 
-void 	cmd_cd(char **argv, char **env);
-void 	cmd_env(char **argv, char **env);
-void 	cmd_pwd(char **argv, char **env);
-void 	cmd_help(char **argv, char **env);
-void 	cmd_exit(char **argv, char **env);
-void 	cmd_clear(char **argv, char **env);
-void 	cmd_echo(char **argv, char **env);
-void	cmd_eval(char **argv, char **env);
-int 	cmd_setenv(char **argv, char ***env);
+void 	cmd_cd(char **argv, char **env, int fd);
+void 	cmd_env(char **argv, char **env, int fd);
+void 	cmd_pwd(char **argv, char **env, int fd);
+void 	cmd_help(char **argv, char **env, int fd);
+void 	cmd_exit(char **argv, char **env, int fd);
+void 	cmd_clear(char **argv, char **env, int fd);
+void 	cmd_echo(char **argv, char **env, int fd);
+void	cmd_eval(char **argv, char **env, int fd);
+int 	cmd_setenv(char **argv, char ***env, int fd);
 
 /*
 ** ---------------------- ERROR ----------------------------------
@@ -104,6 +113,6 @@ void parse_line(char *line, char ***env);
 
 extern char *cmd[];
 extern char *cmd_sep[];
-extern void (*cmd_func[])(char **argv, char **env);
+extern void (*cmd_func[])(char **argv, char **env, int fd);
 
 #endif

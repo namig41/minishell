@@ -12,13 +12,15 @@
 
 #include "minishell.h"
 
-int 	cmd_setenv(char **argv, char ***env)
+int 	cmd_setenv(char **argv, char ***env, int fd)
 {
     int i;
     int assig;
 
     i = 0;
-    assig = -1;
+    assig = 0;
+    (void)fd;
+    (void)env;
     if (!argv[0] || argv[1])
         return 0;
     else

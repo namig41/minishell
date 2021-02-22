@@ -26,7 +26,7 @@ char *cmd[] = {
   	NULL
 };
 
-void (*cmd_func[])(char **args, char **env) = {
+void (*cmd_func[])(char **args, char **env, int fd) = {
     &cmd_cd,
     &cmd_env,
     &cmd_help,
@@ -40,8 +40,8 @@ void (*cmd_func[])(char **args, char **env) = {
 
 char *cmd_sep[] = {
 	"|",
-//	">",
-//	">>",
+    ">",
+    ">>",
 //	"<",
 //	"<<",
 //	"||",

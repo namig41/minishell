@@ -54,7 +54,7 @@ static void get_res(t_stack *operands, char c)
     stack_push(operands, &res);
 }
 
-void 	cmd_eval(char **argc, char **env)
+void 	cmd_eval(char **argc, char **env, int fd)
 {
     t_stack operands;
     t_stack operations;
@@ -123,7 +123,7 @@ void 	cmd_eval(char **argc, char **env)
 
     int *res = stack_pop(&operands);
     char *s_res = ft_itoa(*res);
-    ft_putendl(s_res);
+    ft_putendl_fd(s_res, fd);
     ft_memdel((void **)&s_res);
     stack_destroy(&operands);
     stack_destroy(&operations);

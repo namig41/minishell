@@ -40,13 +40,13 @@ static int search(char *cmd_name, char **cmd_arr)
     return (-1);
 }
 
-static void execute_command(char **argc, char ***env)
+static void execute_command(char **argc, char ***env, int fd)
 {
     int i;
 
     if ((i = search(argc[0], cmd)) != -1)
-        cmd_func[i](argc, *env);
-    else if (cmd_setenv(argc, env))
+        cmd_func[i](argc, *env, fd);
+    else if (cmd_setenv(argc, env, fd))
         ;
     else
         execute(argc, *env);
@@ -88,18 +88,43 @@ static int allocate_memory(char *line, char ****argc, char ***v_sep)
 static void process_command(char ****t_argc, char ***t_sep, char ***env)
 {
     size_t i;
+    int index;
     char ***argc;
     char **v_sep;
+    int fd;
 
     i = 0;
+    index = 0;
     argc = *t_argc;
     v_sep = *t_sep;
     while (argc[i])
     {
-        execute_command(argc[i], env);
+        fd = 1;
+        index = -1;
+        if (v_sep[i])
+        {
+            index = search(v_sep[i], cmd_sep);
+
+            if (index == SEP_PIPE)
+                ;
+            else if (index == SEP_REDIRECT)
+            {
+                fd = open(argc[i + 1][0], O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR);
+            }
+            else if (index == SEP_REDIRECT_ADD)
+            {
+                fd = open(argc[i + 1][0], O_CREAT | O_WRONLY | O_APPEND, S_IRUSR | S_IWUSR);
+            }
+            else if (index == SEP_CONTINUE)
+                ;
+        }
+        execute_command(argc[i], env, fd);
         ft_strsplit_clear(argc[i]);
-        if (v_sep[i] && v_sep[i][0] != ';')
-            ;
+        if (index != -1)
+        {
+            i++;
+            ft_strsplit_clear(argc[i]);
+        }
         i++;
     }
     ft_memdel((void **)&argc);

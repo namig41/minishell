@@ -12,9 +12,10 @@
 
 #include "minishell.h"
 
-void 	cmd_cd(char **argv, char **env)
+void 	cmd_cd(char **argv, char **env, int fd)
 {
     (void)env;
+    (void)fd;
 	if (!argv[1])
         ft_puterror("Not path");
 	else

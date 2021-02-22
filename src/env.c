@@ -12,6 +12,16 @@
 
 #include "minishell.h"
 
+static int get_env_len(char **env)
+{
+    int len;
+
+    len = -1;
+    while (env[++len])
+        ;
+    return len;
+}
+
 void clear_env(char ***env)
 {
 	size_t i;
@@ -24,16 +34,6 @@ void clear_env(char ***env)
 	ft_memdel((void **)&(*env));
 }
 
-static int get_env_len(char **env)
-{
-    int len;
-
-    len = -1;
-    while (env[++len])
-        ;
-    return len;
-}
-
 void create_env(char ***env)
 {
 	char **e;
@@ -41,7 +41,7 @@ void create_env(char ***env)
 
     if (!(e = (char **)malloc(sizeof(char *) * (get_env_len(*env) + 1))))
 	{
-		ft_puterror("alloc error");
+        ft_puterror("Allocation error");
 		exit(1);
 	}
 	i = -1;
@@ -59,7 +59,7 @@ void add_new_env(char ***env, char *new_env)
     i = -1;
     if (!(e = (char **)malloc(sizeof(char *) * (get_env_len(*env) + 2))))
     {
-        ft_puterror("alloc error");
+        ft_puterror("Allocation error");
         exit(1);
     }
     while ((*env)[++i])

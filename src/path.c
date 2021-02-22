@@ -19,6 +19,7 @@ void 	current_path(void)
 	char 	*path;
 
 	path = getcwd(buf, PATH_MAX);
+    ft_putstr("\033[01;34m");
 	ft_putstr(path);
-	ft_putchar('>');
+    ft_putstr("➤\033[00m ");
 }

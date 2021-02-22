@@ -11,12 +11,12 @@
 # **************************************************************************** #
 
 FILE_MINISHELL 	= \
-					main \
 					minishell \
-					execute \
 					commands \
 					path \
 					parser \
+					process \
+					utilities \
 					env
 
 FILE_BUILTINS 	= \
@@ -30,12 +30,8 @@ FILE_BUILTINS 	= \
 					cmd_setenv \
 					cmd_eval
 
-FILE_LA 		= \
-				  arithmetic
-
 DIR_SRC			= ./src/
 DIR_BUILT 		= ./src/builtins/
-DIR_LA  		= ./src/long_arithmetic/
 DIR_INC			= ./includes/
 DIR_LIB			= ./libft/
 DIR_OBJ 		= ./obj/
@@ -43,7 +39,6 @@ DIR_OBJ 		= ./obj/
 OBJ_MINISHELL 	= \
 				  	$(addprefix $(DIR_OBJ), $(addsuffix .o, $(FILE_MINISHELL))) \
 				  	$(addprefix $(DIR_OBJ), $(addsuffix .o, $(FILE_BUILTINS))) \
-				  	$(addprefix $(DIR_OBJ), $(addsuffix .o, $(FILE_LA)))
 
 
 CC 	   			= gcc
@@ -66,9 +61,6 @@ $(DIR_OBJ)%.o: $(DIR_SRC)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
  
 $(DIR_OBJ)%.o: $(DIR_BUILT)%.c
-	@$(CC) $(CFLAGS) -c $< -o $@
-
-$(DIR_OBJ)%.o: $(DIR_LA)%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
  
 clean:

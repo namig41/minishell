@@ -12,11 +12,10 @@
 
 #include "minishell.h"
 
-void 	minishell(char **argv, char ***env)
+void 	minishell(char ***env)
 {
 	char *line;
 	
-    (void)argv;
 	while (1)
 	{
 		current_path();
@@ -28,4 +27,13 @@ void 	minishell(char **argv, char ***env)
         parse_line(line, env);
 		ft_memdel((void **)&line);
 	}
+}
+
+int main(int argc, char *argv[], char *env[])
+{
+    (void)argv;
+    (void)argc;
+    create_env(&env);
+    minishell(&env);
+    return (0);
 }

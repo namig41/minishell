@@ -41,8 +41,7 @@ typedef enum e_sep
 ** ---------------------- MINISHELL ---------------------------------
 */
 
-
-void 	minishell(char **argv, char ***env);
+void 	minishell(char ***env);
 
 /*
 ** ---------------------- ENV ---------------------------------------
@@ -59,15 +58,16 @@ void 	clear_env(char ***env);
 int 	belongs_set(char **set, char *el);
 
 /*
-** ---------------------- SYSCALL ---------------------------------
+** ---------------------- PROCESS COMMAND ---------------------------
 */
 
-void 	execute(char **argv, char **env);
+void    execute_command(char **argv, char **env);
+void 	search_command(char **argc, char ***env, int fd);
+void 	process_command(char ****t_argc, char ***t_sep, char ***env);
 
 /*
 ** ---------------------- COMMANDS ---------------------------------
 */
-
 
 void 	cmd_cd(char **argv, char **env, int fd);
 void 	cmd_env(char **argv, char **env, int fd);
@@ -92,24 +92,22 @@ void 	ft_puterror(const char *s);
 void 	current_path(void);
 
 /*
-** ---------------------- LONG ARITHMETIC -------------------------
+** ---------------------- PARSE -------------------------------
 */
 
-char	*plus(char *a, char *b);
-char	*minus(char *a, char *b);
-char    *mult(char *a, char *b);
-char	*sdiv(char *a, char *b);
+void	parse_line(char *line, char ***env);
 
 /*
-** ---------------------- PARSER -------------------------------
+** ---------------------- UTILITIES -------------------------------
 */
 
-void parse_line(char *line, char ***env);
+int 	strequ(const char *s1, const char *s2);
+int 	search_cmd(char *cmd_name, char **cmd_arr);
+int 	is_sep(char *line, char **cmd_sep);
 
 /*
 ** ---------------------- GLOBALS -------------------------------
 */
-
 
 extern char *cmd[];
 extern char *cmd_sep[];

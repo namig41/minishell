@@ -1,5 +1,9 @@
 # minishell
 
+<p align="center">
+  <img src="shell.png" width="100%" />
+</p>
+
 ## About
 
 ### Instructions
@@ -19,10 +23,14 @@
 - You must deal correctly with the PATH
   and the environment (copy of system char `**environ`).
 - You must implement a series of builtins:
-  - `exit`
-  - `echo`
   - `cd`
-  - `env`
+  - `setenv`
+  - `help`
+  - `pwd`
+  - `clear`
+  - `echo`
+  - `eval`
+  - `exit`
 
 #### Allowed Functions
 
@@ -44,18 +52,20 @@ src
 │   ├── cmd_clear.c
 │   ├── cmd_echo.c
 │   ├── cmd_env.c
+│   ├── cmd_eval.c
 │   ├── cmd_exit.c
 │   ├── cmd_help.c
 │   ├── cmd_pwd.c
 │   └── cmd_setenv.c
 ├── commands.c
 ├── env.c
-├── execute.c
-├── main.c
 ├── minishell.c
-└── path.c
+├── parser.c
+├── path.c
+├── process.c
+└── utilities.c
 
-1 directory, 14 files
+1 directory, 16 files
 
 ```
 

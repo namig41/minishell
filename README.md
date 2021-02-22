@@ -1,7 +1,7 @@
 # minishell
 
 <p align="center">
-  <img src="shell.png" width="100%" />
+  <img src="minishell.png" width="100%" />
 </p>
 
 ## About

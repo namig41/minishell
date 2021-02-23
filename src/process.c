@@ -16,13 +16,13 @@ void execute_command(char **argv, char **env)
 {
     pid_t child_pid;
 
-    child_pid = fork();
     (void)env;
+    child_pid = fork();
     if (child_pid == 0)
     {
         if (execvp(argv[0], argv) == -1)
         {
-            ft_putstr_fd(argv[0], STDERR_FILENO);
+            ft_puterror(argv[0]);
             ft_puterror(": command not found");
         }
     }
@@ -46,45 +46,60 @@ void search_command(char **argc, char ***env, int fd)
 
 void process_command(char ****t_argc, char ***t_sep, char ***env)
 {
-    size_t i;
-    int index;
     char ***argc;
     char **v_sep;
     int fd;
+    int first_command;
+    int second_command;
+    int index_command;
 
-    i = 0;
-    index = 0;
+    first_command = 0;
     argc = *t_argc;
     v_sep = *t_sep;
-    while (argc[i])
+    while (argc[first_command])
     {
-        index = -1;
+        index_command = SEP_NOTHING;
         fd = STDOUT_FILENO;
-        if (v_sep[i])
-        {
-            index = search_cmd(v_sep[i], cmd_sep);
 
-            if (index == SEP_PIPE)
-                ;
-            else if (index == SEP_REDIRECT)
-            {
-                fd = open(argc[i + 1][0], O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR);
-            }
-            else if (index == SEP_REDIRECT_ADD)
-            {
-                fd = open(argc[i + 1][0], O_CREAT | O_WRONLY | O_APPEND, S_IRUSR | S_IWUSR);
-            }
-            else if (index == SEP_CONTINUE)
-                ;
-        }
-        search_command(argc[i], env, fd);
-        ft_strsplit_clear(argc[i]);
-        if (index != -1)
+        if (v_sep[first_command])
         {
-            i++;
-            ft_strsplit_clear(argc[i]);
+            index_command = search_cmd(v_sep[first_command], cmd_sep);
+
+            second_command = first_command + 1;
+
+            if (index_command == SEP_REDIRECT_L_ADD || index_command == SEP_REDIRECT_L)
+            {
+                int tmp = first_command;
+
+                first_command = second_command;
+                second_command = tmp;
+            }
+
+            if (index_command == SEP_PIPE)
+                ;
+            else if (index_command == SEP_REDIRECT_R || index_command == SEP_REDIRECT_L)
+            {
+                fd = open(argc[second_command][0], O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR);
+            }
+            else if (index_command == SEP_REDIRECT_R_ADD || index_command == SEP_REDIRECT_L_ADD)
+            {
+                fd = open(argc[second_command][0], O_CREAT | O_WRONLY | O_APPEND, S_IRUSR | S_IWUSR);
+            }
+            else if (index_command == SEP_CONTINUE)
+                index_command = SEP_NOTHING;
         }
-        i++;
+
+        search_command(argc[first_command], env, fd);
+        ft_strsplit_clear(argc[first_command]);
+
+        if (index_command != SEP_NOTHING)
+        {
+            ft_strsplit_clear(argc[second_command]);
+            if (index_command != SEP_REDIRECT_L_ADD && index_command != SEP_REDIRECT_L)
+                first_command = second_command;
+        }
+
+        first_command++;
     }
     ft_memdel((void **)&argc);
     ft_strsplit_clear(v_sep);

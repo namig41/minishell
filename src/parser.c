@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int allocate_memory(char *line, char ****argc, char ***v_sep)
+void allocate_memory(char *line, char ****argc, char ***v_sep)
 {
     size_t i;
     size_t sep_count;
@@ -27,15 +27,13 @@ int allocate_memory(char *line, char ****argc, char ***v_sep)
     }
 
     if (!(*argc = (char ***)ft_memalloc(sizeof(char ***) * (sep_count + 1))))
-        return 0;
+        return ;
 
     if (!(*v_sep = (char **)ft_memalloc(sizeof(char **) * sep_count)))
-        return 0;
+        return ;
 
     (*v_sep)[sep_count - 1] = 0;
     (*argc)[sep_count] = 0;
-
-    return 1;
 }
 
 // command_name arg arg sep command_name arg arg
@@ -76,9 +74,7 @@ void parse_line(char *line, char ***env)
     char ***argc;
     char **v_sep;
 
-    if (!allocate_memory(line, &argc, &v_sep))
-        return ;
-
+    allocate_memory(line, &argc, &v_sep);
     parse_command(line, &argc, &v_sep);
     process_command(&argc, &v_sep, env);
 }

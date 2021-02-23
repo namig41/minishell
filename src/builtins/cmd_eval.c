@@ -42,13 +42,19 @@ static void get_res(t_stack *operands, char c)
             res = *a - *b;
             break;
         case '/':
-            res = *a / *b;
+            if (*b != 0)
+                res = *a / *b;
+            else
+            {
+                ft_puterror("division by zero");
+                exit(1);
+            }
             break;
         case '*':
             res = *a * *b;
             break;
         case '%':
-            res = (int)*a % (int)*b;
+            res = *a % *b;
             break;
     }
     stack_push(operands, &res);

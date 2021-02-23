@@ -33,10 +33,10 @@ typedef enum e_sep
 {
     SEP_NOTHING = -1,
     SEP_PIPE,
-    SEP_REDIRECT_R,
-    SEP_REDIRECT_L,
     SEP_REDIRECT_R_ADD,
     SEP_REDIRECT_L_ADD,
+    SEP_REDIRECT_R,
+    SEP_REDIRECT_L,
     SEP_CONTINUE
 }           t_sep;
 

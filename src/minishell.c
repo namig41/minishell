@@ -31,8 +31,8 @@ void 	minishell(char ***env)
 
 int main(int argc, char *argv[], char *env[])
 {
-    (void)argv;
     (void)argc;
+    (void)argv;
     create_env(&env);
     minishell(&env);
     return (0);

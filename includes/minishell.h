@@ -65,8 +65,8 @@ int 	belongs_set(char **set, char *el);
 */
 
 void    execute_command(char **argv, char **env);
-void 	search_command(char **argc, char ***env, int fd);
-void 	process_command(char ****t_argc, char ***t_sep, char ***env);
+void 	search_command(char **argv, char ***env, int fd);
+void 	process_command(char ****t_argv, char ***t_sep, char ***env);
 
 /*
 ** ---------------------- COMMANDS ---------------------------------

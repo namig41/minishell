@@ -60,20 +60,21 @@ static void get_res(t_stack *operands, char c)
     stack_push(operands, &res);
 }
 
-void 	cmd_eval(char **argc, char **env, int fd)
+void 	cmd_eval(char **argv, char **env, int fd)
 {
+    if (argv[2])
+        return ;
+
     t_stack operands;
     t_stack operations;
     char *expr;
     int i;
     int unary_flag;
 
-    if (argc[2])
-        return ;
-
     (void)env;
+
     i = 0;
-    expr = argc[1];
+    expr = argv[1];
     unary_flag = 1;
     operands.data = 0;
     operations.data = 0;

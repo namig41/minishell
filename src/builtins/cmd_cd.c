@@ -17,10 +17,10 @@ void 	cmd_cd(char **argv, char **env, int fd)
     (void)env;
     (void)fd;
 	if (!argv[1])
-        ft_puterror("Not path");
+        ft_puterror("not path");
 	else
 	{
 		if (chdir(argv[1]) != 0)
-            ft_puterror("Path don't found");
+            ft_puterror("path don't found");
 	}
 }

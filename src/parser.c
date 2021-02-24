@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void allocate_memory(char *line, char ****argc, char ***v_sep)
+void allocate_memory(char *line, char ****argv, char ***v_sep)
 {
     size_t i;
     size_t sep_count;
@@ -26,31 +26,31 @@ void allocate_memory(char *line, char ****argc, char ***v_sep)
         i++;
     }
 
-    if (!(*argc = (char ***)ft_memalloc(sizeof(char ***) * (sep_count + 1))))
+    if (!(*argv = (char ***)ft_memalloc(sizeof(char ***) * (sep_count + 1))))
         return ;
 
     if (!(*v_sep = (char **)ft_memalloc(sizeof(char **) * sep_count)))
         return ;
 
     (*v_sep)[sep_count - 1] = 0;
-    (*argc)[sep_count] = 0;
+    (*argv)[sep_count] = 0;
 }
 
 // command_name arg arg sep command_name arg arg
 
-void parse_command(char *line, char ****t_argc, char ***t_sep)
+void parse_command(char *line, char ****t_argv, char ***t_sep)
 {
     size_t i;
     size_t j;
     int st;
     int index;
-    char ***argc;
+    char ***argv;
     char **v_sep;
 
     i = 0;
     j = 0;
     st = 0;
-    argc = *t_argc;
+    argv = *t_argv;
     v_sep = *t_sep;
     while (line[i])
     {
@@ -58,7 +58,7 @@ void parse_command(char *line, char ****t_argc, char ***t_sep)
         {
             v_sep[j] = ft_strdup(cmd_sep[index]);
             line[i] = 0;
-            argc[j] = ft_strsplit(line + st, ' ');
+            argv[j] = ft_strsplit(line + st, ' ');
             i += ft_strlen(v_sep[j]) - 1;
             st = i + 1;
             j++;
@@ -66,15 +66,15 @@ void parse_command(char *line, char ****t_argc, char ***t_sep)
         i++;
     }
 
-    argc[j] = ft_strsplit(line + st, ' ');
+    argv[j] = ft_strsplit(line + st, ' ');
 }
 
 void parse_line(char *line, char ***env)
 {
-    char ***argc;
+    char ***argv;
     char **v_sep;
 
-    allocate_memory(line, &argc, &v_sep);
-    parse_command(line, &argc, &v_sep);
-    process_command(&argc, &v_sep, env);
+    allocate_memory(line, &argv, &v_sep);
+    parse_command(line, &argv, &v_sep);
+    process_command(&argv, &v_sep, env);
 }

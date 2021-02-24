@@ -16,8 +16,9 @@ void 	cmd_env(char **argv, char **env, int fd)
 {
 	int i;
 
-	i = -1;
+    i = -1;
+    (void)argv;
+    (void)env;
 	while (env[++i])
         ft_putendl_fd(env[i], fd);
-	(void)argv;
 }

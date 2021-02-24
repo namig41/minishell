@@ -18,7 +18,7 @@ void 	minishell(char ***env)
 	
 	while (1)
 	{
-		current_path();
+        print_prompt();
 		if (get_next_line(STDIN_FILENO, &line) < 0)
 		{
             clear_env(env);

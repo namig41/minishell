@@ -20,6 +20,16 @@ void 	cmd_help(char **argv, char **env, int fd)
 	i = 0;
     (void)argv;
     (void)env;
+
+    ft_putchar('\n');
+    ft_putendl(",-.-.o     o     |         |    |    ");
+    ft_putendl("| | |.,---..,---.|---.,---.|    |    ");
+    ft_putendl("| | |||   ||`---.|   ||---'|    |    ");
+    ft_putendl("` ' '``   '``---'`   '`---'`---'`---'");
+
+    ft_putendl("Type program names and arguments, and hit enter.");
+    ft_putendl("The following are built in:");
+
 	while (cmd[i])
 	{
         ft_putendl_fd(cmd[i], fd);

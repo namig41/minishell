@@ -22,7 +22,7 @@ void execute_command(char **argv, char **env)
     {
         if (execvp(argv[0], argv) == -1)
         {
-            ft_puterror(argv[0]);
+            ft_putstr_fd(argv[0], STDERR_FILENO);
             ft_puterror(": command not found");
         }
     }
@@ -32,6 +32,63 @@ void execute_command(char **argv, char **env)
         wait(&child_pid);
 }
 
+void execute_command_with_pipe(char **argv1, char **argv2, char **env)
+{
+    int fd[2];
+    pid_t child_pid;
+
+    (void)env;
+
+    if (pipe(fd) == -1)
+    {
+        ft_puterror("pipe failed");
+        return ;
+    }
+
+    child_pid = fork();
+    if (child_pid == 0)
+    {
+        dup2(fd[1], STDOUT_FILENO);
+        close(fd[0]);
+        close(fd[1]);
+
+        if (execvp(argv1[0], argv1) == -1)
+        {
+            ft_putstr_fd(argv1[0], STDERR_FILENO);
+            ft_puterror(": command not found");
+        }
+        exit(1);
+    }
+    else if (child_pid < 0)
+        ft_puterror("failed to fork");
+    else
+    {
+        child_pid = fork();
+
+        if (child_pid == 0)
+        {
+            dup2(fd[0], STDIN_FILENO);
+            close(fd[0]);
+            close(fd[1]);
+
+            if (execvp(argv2[0], argv2) == -1)
+            {
+                ft_putstr_fd(argv1[0], STDERR_FILENO);
+                ft_puterror(": command not found");
+            }
+            else if (child_pid < 0)
+                ft_puterror("failed to fork");
+            else
+                exit(1);
+        }
+
+        close(fd[0]);
+        close(fd[1]);
+
+        int status;
+        waitpid(child_pid, &status, 0);
+    }
+}
 void search_command(char **argc, char ***env, int fd)
 {
     int i;
@@ -46,12 +103,12 @@ void search_command(char **argc, char ***env, int fd)
 
 void process_command(char ****t_argc, char ***t_sep, char ***env)
 {
-    char ***argc;
-    char **v_sep;
     int fd;
     int first_command;
     int second_command;
     int index_command;
+    char ***argc;
+    char **v_sep;
 
     first_command = 0;
     argc = *t_argc;
@@ -76,7 +133,14 @@ void process_command(char ****t_argc, char ***t_sep, char ***env)
             }
 
             if (index_command == SEP_PIPE)
-                ;
+            {
+                execute_command_with_pipe(argc[first_command], argc[second_command], *env);
+                ft_strsplit_clear(argc[first_command]);
+                ft_strsplit_clear(argc[second_command]);
+
+                first_command = second_command + 1;
+                continue ;
+            }
             else if (index_command == SEP_REDIRECT_R || index_command == SEP_REDIRECT_L)
             {
                 fd = open(argc[second_command][0], O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR);

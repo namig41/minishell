@@ -83,19 +83,13 @@ void	cmd_eval(char **argv, char **env, int fd);
 int 	cmd_setenv(char **argv, char ***env, int fd);
 
 /*
-** ---------------------- ERROR ----------------------------------
+** ---------------------- PROMPT ----------------------------------
 */
 
-void 	ft_puterror(const char *s);
+void 	print_prompt(void);
 
 /*
-** ---------------------- PATH ------------------------------------
-*/
-
-void 	current_path(void);
-
-/*
-** ---------------------- PARSE -------------------------------
+** ---------------------- PARSE -----------------------------------
 */
 
 void	parse_line(char *line, char ***env);

@@ -13,7 +13,7 @@
 
 #include "minishell.h"
 
-void 	current_path(void)
+void 	print_prompt(void)
 {
 	char	buf[PATH_MAX + 1];
 	char 	*path;

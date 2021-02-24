@@ -13,7 +13,7 @@
 FILE_MINISHELL 	= \
 					minishell \
 					commands \
-					path \
+					prompt \
 					parser \
 					process \
 					utilities \

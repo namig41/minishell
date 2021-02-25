@@ -17,7 +17,7 @@ void 	minishell(char ***env)
 	char *line;
 	
     line = 0;
-	while (1)
+    while (g_signal_flag_run)
 	{
         print_prompt();
         if (get_next_line(STDIN_FILENO, &line) < 0 || !line)
@@ -35,6 +35,9 @@ int main(int argc, char *argv[], char *env[])
     (void)argc;
     (void)argv;
     signal(SIGINT, signal_handler);
+    signal(SIGQUIT, signal_handler);
+    signal(SIGSTOP, signal_handler);
+    signal(SIGCONT, signal_handler);
     create_env(&env);
     minishell(&env);
     return (0);

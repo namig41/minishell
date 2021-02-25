@@ -47,3 +47,5 @@ char *cmd_sep[] = {
     ";",
     NULL
 };
+
+volatile sig_atomic_t g_signal_flag_run = 1;

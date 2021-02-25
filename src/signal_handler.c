@@ -15,9 +15,10 @@
 
 void 	signal_handler(int sig)
 {
-    if (sig == SIGINT)
-    {
-        ft_putstr("\n");
+    if (sig == SIGINT || sig == SIGQUIT)
         exit(1);
-    }
+    else if (sig == SIGSTOP)
+        g_signal_flag_run = 0;
+    else if (sig == SIGCONT)
+        g_signal_flag_run = 1;
 }

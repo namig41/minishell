@@ -111,4 +111,6 @@ extern char *cmd[];
 extern char *cmd_sep[];
 extern void (*cmd_func[])(char **argv, char **env, int fd);
 
+extern volatile sig_atomic_t g_signal_flag_run;
+
 #endif

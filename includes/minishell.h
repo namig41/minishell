@@ -55,18 +55,13 @@ void	add_new_env(char ***env, char *new_env);
 void 	clear_env(char ***env);
 
 /*
-** ---------------------- PARSE -------------------------------------
-*/
-
-int 	belongs_set(char **set, char *el);
-
-/*
 ** ---------------------- PROCESS COMMAND ---------------------------
 */
 
 void    execute_command(char **argv, char **env);
 void 	search_command(char **argv, char ***env, int fd);
 void 	process_command(char ****t_argv, char ***t_sep, char ***env);
+void	execute_command_with_pipe(char **argv1, char **argv2, char **env);
 
 /*
 ** ---------------------- COMMANDS ---------------------------------
@@ -93,6 +88,12 @@ void 	print_prompt(void);
 */
 
 void	parse_line(char *line, char ***env);
+
+/*
+** ---------------------- SIGNALS -----------------------------------
+*/
+
+void 	signal_handler(int sig);
 
 /*
 ** ---------------------- UTILITIES -------------------------------

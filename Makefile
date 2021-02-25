@@ -17,6 +17,7 @@ FILE_MINISHELL 	= \
 					parser \
 					process \
 					utilities \
+					signal_handler \
 					env
 
 FILE_BUILTINS 	= \

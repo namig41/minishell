@@ -16,16 +16,17 @@ void 	minishell(char ***env)
 {
 	char *line;
 	
+    line = 0;
 	while (1)
 	{
         print_prompt();
-		if (get_next_line(STDIN_FILENO, &line) < 0)
+        if (get_next_line(STDIN_FILENO, &line) < 0 || !line)
 		{
             clear_env(env);
 			exit(1);
 		}
         parse_line(line, env);
-		ft_memdel((void **)&line);
+        ft_memdel((void **)&line);
 	}
 }
 
@@ -33,6 +34,7 @@ int main(int argc, char *argv[], char *env[])
 {
     (void)argc;
     (void)argv;
+    signal(SIGINT, signal_handler);
     create_env(&env);
     minishell(&env);
     return (0);

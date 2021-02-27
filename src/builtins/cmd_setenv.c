@@ -14,7 +14,7 @@
 
 int 	cmd_setenv(char **argv, char ***env, int fd)
 {
-    int i;
+    size_t i;
     int assig;
 
     i = 0;
@@ -22,7 +22,7 @@ int 	cmd_setenv(char **argv, char ***env, int fd)
     (void)fd;
     (void)env;
     if (!argv[0] || argv[1])
-        return 0;
+        return (0);
     else
     {
         while (argv[0][i])
@@ -32,13 +32,13 @@ int 	cmd_setenv(char **argv, char ***env, int fd)
                 if (assig == -1)
                     assig = i;
                 else
-                    return 0;
+                    return (0);
             }
             i++;
         }
         if (assig == 0 || assig == i)
-            return 0;
+            return (0);
         add_new_env(env, argv[0]);
     }
-    return 1;
+    return (1);
 }

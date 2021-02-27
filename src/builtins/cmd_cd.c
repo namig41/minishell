@@ -14,13 +14,33 @@
 
 void 	cmd_cd(char **argv, char **env, int fd)
 {
+    char *home_path;
+    char *new_path;
+
     (void)env;
     (void)fd;
-	if (!argv[1])
-        ft_puterror("not path");
-	else
-	{
-		if (chdir(argv[1]) != 0)
-            ft_puterror("path don't found");
-	}
+    home_path = getenv("HOME");
+    if (!argv[1])
+        new_path = home_path;
+    else
+    {
+        if (ft_strequ(argv[1], "--"))
+            new_path = home_path;
+        else if (argv[1][0] == '-' && !argv[1][2])
+            new_path = getenv("OLDPWD");
+        else
+            new_path = argv[1];
+    }
+
+    if (chdir(new_path))
+    {
+        ft_putstr("cd: ");
+        if (access(new_path, F_OK) == -1)
+            ft_putstr("no such file or directory: ");
+        else if (access(new_path, R_OK) == -1)
+            ft_putstr("permission denied: ");
+        else
+            ft_putstr("not a directory: ");
+        ft_putendl(argv[1]);
+    }
 }

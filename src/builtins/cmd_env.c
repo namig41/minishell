@@ -14,11 +14,14 @@
 
 void 	cmd_env(char **argv, char **env, int fd)
 {
-	int i;
+    size_t i;
 
-    i = -1;
+    i = 0;
     (void)argv;
     (void)env;
-	while (env[++i])
+    while (env[i])
+    {
         ft_putendl_fd(env[i], fd);
+        i++;
+    }
 }

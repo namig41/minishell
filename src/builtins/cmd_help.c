@@ -13,6 +13,18 @@
 
 #include "minishell.h"
 
+static void print_header(int fd)
+{
+    ft_putchar_fd('\n', fd);
+    ft_putendl_fd(",-.-.o     o     |         |    |    ", fd);
+    ft_putendl_fd("| | |.,---..,---.|---.,---.|    |    ", fd);
+    ft_putendl_fd("| | |||   ||`---.|   ||---'|    |    ", fd);
+    ft_putendl_fd("` ' '``   '``---'`   '`---'`---'`---'", fd);
+
+    ft_putendl_fd("Type program names and arguments, and hit enter.", fd);
+    ft_putendl_fd("The following are built in:", fd);
+}
+
 void 	cmd_help(char **argv, char **env, int fd)
 {
 	size_t i;	
@@ -20,16 +32,7 @@ void 	cmd_help(char **argv, char **env, int fd)
 	i = 0;
     (void)argv;
     (void)env;
-
-    ft_putchar('\n');
-    ft_putendl(",-.-.o     o     |         |    |    ");
-    ft_putendl("| | |.,---..,---.|---.,---.|    |    ");
-    ft_putendl("| | |||   ||`---.|   ||---'|    |    ");
-    ft_putendl("` ' '``   '``---'`   '`---'`---'`---'");
-
-    ft_putendl("Type program names and arguments, and hit enter.");
-    ft_putendl("The following are built in:");
-
+    print_header(fd);
 	while (cmd[i])
 	{
         ft_putendl_fd(cmd[i], fd);

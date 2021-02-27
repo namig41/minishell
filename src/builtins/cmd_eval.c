@@ -62,7 +62,7 @@ static void get_res(t_stack *operands, char c)
 
 void 	cmd_eval(char **argv, char **env, int fd)
 {
-    if (argv[2])
+    if (!argv[1] || argv[2])
         return ;
 
     t_stack operands;

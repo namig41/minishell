@@ -16,7 +16,7 @@ static int check_env(char *var, int fd)
 {
 	if (var[0] == '$')
 	{
-        ft_putstr_fd((char *)getenv(var + 1), fd);
+        ft_putstr_fd(getenv(var + 1), fd);
 		return (1);
 	}
 	return (0);

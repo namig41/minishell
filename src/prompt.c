@@ -10,16 +10,38 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "minishell.h"
 
-void 	print_prompt(void)
+int 	offset_path(char **cur)
 {
-	char	buf[PATH_MAX + 1];
-	char 	*path;
+    int count;
+    char *path;
+    int i;
 
-	path = getcwd(buf, PATH_MAX);
+    i = 0;
+    count = 3;
+    path = *cur;
+    while (path[i])
+    {
+       if (path[i] == '/')
+           count--;
+       if (!count)
+           break;
+        i++;
+    }
+    return i;
+}
+
+void	print_prompt(void)
+{
+    char buf[PATH_MAX + 1];
+    char *path;
+    int offs;
+
+    path = getcwd(buf, PATH_MAX);
+    offs = offset_path(&path);
     ft_putstr("\033[01;34m");
-	ft_putstr(path);
+    ft_putstr("~ ");
+    ft_putstr(path + offs);
     ft_putstr("➤\033[00m ");
 }

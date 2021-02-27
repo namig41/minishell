@@ -12,7 +12,7 @@
 
 FILE_MINISHELL 	= \
 					minishell \
-					commands \
+					variables \
 					prompt \
 					parser \
 					process \

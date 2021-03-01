@@ -40,10 +40,10 @@ void (*cmd_func[])(char **argv, char **env, int fd) = {
 
 char *cmd_sep[] = {
 	"|",
-    ">>",
-    "<<",
     ">",
     "<",
+    ">>",
+    "<<",
     ";",
     NULL
 };

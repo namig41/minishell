@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void execute_command(char **argv, char **env)
+void execute_command(char **argv, char **env, int fd)
 {
     pid_t child_pid;
 
@@ -20,6 +20,7 @@ void execute_command(char **argv, char **env)
     child_pid = fork();
     if (child_pid == 0)
     {
+        dup2(fd, STDOUT_FILENO);
         if (execvp(argv[0], argv) == -1)
         {
             ft_putstr_fd(argv[0], STDERR_FILENO);
@@ -98,7 +99,7 @@ void search_command(char **argv, char ***env, int fd)
     else if (cmd_setenv(argv, env, fd))
         ;
     else
-        execute_command(argv, *env);
+        execute_command(argv, *env, fd);
 }
 
 void process_command(char ****t_argv, char ***t_sep, char ***env)
@@ -155,6 +156,7 @@ void process_command(char ****t_argv, char ***t_sep, char ***env)
 
         search_command(argv[first_command], env, fd);
         ft_strsplit_clear(argv[first_command]);
+        close(fd);
 
         if (index_command != SEP_NOTHING)
         {

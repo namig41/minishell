@@ -41,7 +41,7 @@ void	print_prompt(void)
     path = getcwd(buf, PATH_MAX);
     offs = offset_path(&path);
     ft_putstr("\033[01;34m");
-    ft_putstr("~ ");
+    ft_putstr("~");
     ft_putstr(path + offs);
     ft_putstr("➤\033[00m ");
 }

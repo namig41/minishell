@@ -58,7 +58,7 @@ void 	clear_env(char ***env);
 ** ---------------------- PROCESS COMMAND ---------------------------
 */
 
-void    execute_command(char **argv, char **env);
+void    execute_command(char **argv, char **env, int fd);
 void 	search_command(char **argv, char ***env, int fd);
 void 	process_command(char ****t_argv, char ***t_sep, char ***env);
 void	execute_command_with_pipe(char **argv1, char **argv2, char **env);

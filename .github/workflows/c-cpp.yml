@@ -17,7 +17,5 @@ jobs:
       run: git submodule update --init --recursive
     - name: make
       run: make
-    - name: minishell
-      run: ./minishell
     - name: make check
       run: make check

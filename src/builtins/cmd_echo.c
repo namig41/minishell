@@ -45,7 +45,8 @@ void 	cmd_echo(char **argv, char **env, int fd)
 	{
         if (!check_env(argv[i], fd))
             put_echo(argv[i], fd);
-        ft_putchar_fd(' ', fd);
+        if (argv[i + 1])
+            ft_putchar_fd(' ', fd);
 		i++;
 	}
     ft_putchar_fd('\n', fd);

@@ -36,6 +36,7 @@ DIR_BUILT 		= ./src/builtins/
 DIR_INC			= ./includes/
 DIR_LIB			= ./libft/
 DIR_OBJ 		= ./obj/
+DIR_TESTS 		= ./tests/
 
 OBJ_MINISHELL 	= \
 				  	$(addprefix $(DIR_OBJ), $(addsuffix .o, $(FILE_MINISHELL))) \
@@ -43,6 +44,7 @@ OBJ_MINISHELL 	= \
 
 
 CC 	   			= gcc
+PYTHON 			= python3
 MINISHELL 		= minishell
 #CFLAGS 	   		= -Wall -Werror -Wextra -O2 -I$(DIR_INC) -I$(DIR_LIB)$(DIR_INC)
 CFLAGS 	   		=  -O2 -g -I$(DIR_INC) -I$(DIR_LIB)$(DIR_INC)
@@ -51,6 +53,9 @@ all: minishell
 
 lib:
 	@make -C $(DIR_LIB)
+
+check:
+	pytest $(DIR_TESTS)/checker.py
 
 $(DIR_OBJ):
 	@mkdir -p $(DIR_OBJ)

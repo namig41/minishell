@@ -15,15 +15,17 @@
 int  strequ(const char *s1, const char *s2)
 {
     int i;
+    int len;
 
     i = 0;
-    while (s1[i] && s2[i])
+    len = ft_strlen(s2);
+    while (i < len)
     {
         if (s1[i] != s2[i])
-            return 0;
+            return (0);
         i++;
     }
-    return 1;
+    return (1);
 }
 
 int search_cmd(char *cmd_name, char **cmd_arr)

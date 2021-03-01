@@ -29,7 +29,7 @@ class TestStringMethods(unittest.TestCase):
 
 tests = [
 [
-"ls >",
+"ls >>",
 ],
 [
 "touch \"my file with whitespaces in name.txt\"",

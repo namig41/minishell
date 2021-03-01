@@ -144,7 +144,7 @@ void process_command(char ****t_argv, char ***t_sep, char ***env)
             }
             else if (index_command == SEP_REDIRECT_R || index_command == SEP_REDIRECT_L)
             {
-                fd = open(argv[second_command][0], O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR);
+                fd = open(argv[second_command][0], O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR);
             }
             else if (index_command == SEP_REDIRECT_R_ADD || index_command == SEP_REDIRECT_L_ADD)
             {
@@ -156,7 +156,8 @@ void process_command(char ****t_argv, char ***t_sep, char ***env)
 
         search_command(argv[first_command], env, fd);
         ft_strsplit_clear(argv[first_command]);
-        close(fd);
+        if (fd != STDOUT_FILENO)
+            close(fd);
 
         if (index_command != SEP_NOTHING)
         {

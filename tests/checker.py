@@ -14,9 +14,7 @@ tests = [
         [
             "pwd >>",
             "ls /home/namig >> ",
-            "echo 'Hello, World !!!' >>",
-            "env >> ",
-            "echo Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco >> ",
+            "echo 'Hello, World !!!' >>"
         ]
     ]
 ]
@@ -25,7 +23,7 @@ minishell = subprocess.Popen(['./minishell'], stdin=subprocess.PIPE, stdout=subp
 
 class TestStringMethods(unittest.TestCase):
 
-  def test1(self):
+  def test(self):
 
     file_minishell = "minishell_test"
     file_shell = "shell_test"

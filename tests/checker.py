@@ -1,63 +1,55 @@
 #!/usr/bin/env python3
 
 import unittest
-import sys
 import os
 import subprocess
+from random import choice
 
-tests = [
-    [
-        [
-            "mkdir -p tmp",
-            "cd tmp",
-        ],
-        [
-            "pwd >>",
-            "ls /home/namig >> ",
-            "echo 'Hello, World !!!' >>"
-        ]
-    ]
+COMMANDS = [
+    "pwd",
+    "ps",
+    "cat ../README.md",
+    "ls /",
 ]
 
-minishell = subprocess.Popen(['./minishell'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+TEXT_ARRAY = "Lorem Ipsum is simply dummy text of the printing and typesetting industry".split(' ')
+
+minishell = subprocess.Popen(['../minishell'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+
 
 class TestStringMethods(unittest.TestCase):
 
-  def test(self):
+    def base_test10(self):
+        create_file = "mkdir -p tmp; cd tmp; touch "
+        MINISHELL_FILE_NAME = "tmp_minishell"
+        SHELL_FILE_NAME = "tmp_shell"
 
-    file_minishell = "minishell_test"
-    file_shell = "shell_test"
-    v_comm = ""
+        minishell_commands = create_file + MINISHELL_FILE_NAME + ';'
+        shell_commands = create_file + SHELL_FILE_NAME + ';'
 
-    for commands in tests[0][0]:
-        v_comm += commands  + ';'
+        for i in range(10):
+            rand_command = choice(COMMANDS)
+            minishell_commands += "{} >> {};".format(rand_command, MINISHELL_FILE_NAME)
+            shell_commands += "{} >> {};".format(rand_command, SHELL_FILE_NAME)
 
-    for commands in tests[0][1]:
-        v_comm += commands + file_shell + ';'
+        for i in range(10):
+            rand_word = choice(TEXT_ARRAY)
+            minishell_commands += "echo {} >> {};".format(rand_word, MINISHELL_FILE_NAME)
+            shell_commands += "echo {} >> {};".format(rand_word, SHELL_FILE_NAME)
 
-    os.system(v_comm)
+        os.system(shell_commands)
+        minishell.communicate(input=minishell_commands.encode())
 
-    v_comm = ""
-    for commands in tests[0][0]:
-        v_comm += commands  + ';'
+        f1 = open("tmp/" + MINISHELL_FILE_NAME, 'r')
+        f2 = open("tmp/" + SHELL_FILE_NAME, 'r')
 
-    for commands in tests[0][1]:
-        v_comm += commands + file_minishell + ';'
-    
-    minishell.communicate(input=v_comm.encode()) 
+        # os.system("rm -rf tmp/")
 
-    
-    f1 = open("tmp/" + file_minishell, 'r')
-    f2 = open("tmp/" + file_shell, 'r')
+        self.assertEqual(f1.read(), f2.read())
 
-    os.system("rm -rf tmp/")
+        f1.close()
+        f2.close()
 
-    self.assertEqual(f1.read(), f2.read())
-
-    f1.close()
-    f2.close()
-
-    
 
 if __name__ == "__main__":
     unittest.main()

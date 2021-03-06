@@ -77,5 +77,3 @@ fclean: clean
 	@rm -rf $(MINISHELL)
 
 re: fclean all
-
-.PHONY: all clean fclean re

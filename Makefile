@@ -55,7 +55,7 @@ lib:
 	@make -C $(DIR_LIB)
 
 check:
-	python3 -m pytest $(DIR_TESTS)/checker.py
+	@python3 -m pytest $(DIR_TESTS)/unit_test.py -v
 
 $(DIR_OBJ):
 	@mkdir -p $(DIR_OBJ)

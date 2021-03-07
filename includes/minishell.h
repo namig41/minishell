@@ -93,6 +93,7 @@ void	parse_line(char *line, char ***env);
 ** ---------------------- SIGNALS -----------------------------------
 */
 
+void 	signal_init(void);
 void 	signal_handler(int sig);
 
 /*

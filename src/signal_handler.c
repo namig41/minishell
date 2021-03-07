@@ -13,6 +13,14 @@
 
 #include "minishell.h"
 
+void 	signal_init(void)
+{
+    signal(SIGINT, signal_handler);
+    signal(SIGQUIT, signal_handler);
+    signal(SIGSTOP, signal_handler);
+    signal(SIGCONT, signal_handler);
+}
+
 void 	signal_handler(int sig)
 {
     if (sig == SIGINT || sig == SIGQUIT)

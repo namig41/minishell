@@ -34,10 +34,7 @@ int main(int argc, char *argv[], char *env[])
 {
     (void)argc;
     (void)argv;
-    signal(SIGINT, signal_handler);
-    signal(SIGQUIT, signal_handler);
-    signal(SIGSTOP, signal_handler);
-    signal(SIGCONT, signal_handler);
+	signal_init();
     create_env(&env);
     minishell(&env);
     return (0);

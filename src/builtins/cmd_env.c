@@ -12,16 +12,15 @@
 
 #include "minishell.h"
 
-void 	cmd_env(char **argv, char **env, int fd)
+void 	cmd_env(char **argv, int fd)
 {
-    size_t i;
+	t_list *l_tmp;
 
-    i = 0;
     (void)argv;
-    (void)env;
-    while (env[i])
+	l_tmp = l_env;
+	while (l_tmp)
     {
-        ft_putendl_fd(env[i], fd);
-        i++;
+		ft_putendl_fd((char *)l_tmp->data, fd);
+		l_tmp = l_tmp->next;
     }
 }

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void 	minishell(char ***env)
+void 	minishell(void)
 {
 	char *line;
 	
@@ -21,11 +21,8 @@ void 	minishell(char ***env)
 	{
         print_prompt();
         if (get_next_line(STDIN_FILENO, &line) < 0 || !line)
-		{
-            clear_env(env);
-			exit(1);
-		}
-        parse_line(line, env);
+			cmd_exit(0, 0);
+		parse_line(line);
         ft_memdel((void **)&line);
 	}
 }
@@ -35,7 +32,7 @@ int main(int argc, char *argv[], char *env[])
     (void)argc;
     (void)argv;
 	signal_init();
-    create_env(&env);
-    minishell(&env);
+	init_env(env);
+	minishell();
     return (0);
 }

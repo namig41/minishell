@@ -35,12 +35,11 @@ static void put_echo(const char *s, int fd)
 	}
 }
 
-void 	cmd_echo(char **argv, char **env, int fd)
+void 	cmd_echo(char **argv, int fd)
 {
 	size_t i;
 
 	i = 1;
-    (void)env;
 	while (argv[i])
 	{
         if (!check_env(argv[i], fd))

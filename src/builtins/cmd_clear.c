@@ -12,10 +12,9 @@
 
 #include "minishell.h"
 
-void 	cmd_clear(char **argv, char **env, int fd)
+void 	cmd_clear(char **argv, int fd)
 {
 	(void)argv;
-	(void)env;
     (void)fd;
 	ft_putstr(CLEAR_SCREEN);
 }

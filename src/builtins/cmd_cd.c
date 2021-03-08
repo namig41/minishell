@@ -12,12 +12,11 @@
 
 #include "minishell.h"
 
-void 	cmd_cd(char **argv, char **env, int fd)
+void 	cmd_cd(char **argv, int fd)
 {
     char *home_path;
     char *new_path;
 
-    (void)env;
     (void)fd;
     home_path = getenv("HOME");
     if (!argv[1])

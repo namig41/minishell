@@ -25,16 +25,17 @@ static void print_header(int fd)
     ft_putendl_fd("The following are built in:", fd);
 }
 
-void 	cmd_help(char **argv, char **env, int fd)
+void 	cmd_help(char **argv, int fd)
 {
 	size_t i;	
 
 	i = 0;
     (void)argv;
-    (void)env;
     print_header(fd);
 	while (cmd[i])
 	{
+		ft_putnbr_fd(i + 1, fd);
+		ft_putstr_fd(". ", fd);
         ft_putendl_fd(cmd[i], fd);
 		i++;
 	}

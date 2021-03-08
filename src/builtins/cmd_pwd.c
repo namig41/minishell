@@ -12,11 +12,10 @@
 
 #include "minishell.h"
 
-void 	cmd_pwd(char **argv, char **env, int fd)
+void 	cmd_pwd(char **argv, int fd)
 {
 	char	buf[PATH_MAX + 1];
 
     (void)argv;
-    (void)env;
     ft_putendl_fd(getcwd(buf, PATH_MAX), fd);
 }

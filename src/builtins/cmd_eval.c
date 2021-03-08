@@ -81,7 +81,7 @@ static void get_res(t_stack *operands, char c)
     stack_push(operands, &res);
 }
 
-void 	cmd_eval(char **argv, char **env, int fd)
+void 	cmd_eval(char **argv, int fd)
 {
     if (!argv[1] || argv[2])
         return ;
@@ -99,7 +99,6 @@ void 	cmd_eval(char **argv, char **env, int fd)
     operations.data = 0;
     stack_init(&operands, 1, sizeof(double));
     stack_init(&operations, 1, sizeof(char));
-    (void)env;
     while (expr[i])
     {
         if (expr[i] == ' ')

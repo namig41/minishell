@@ -36,8 +36,6 @@ void allocate_memory(char *line, char ****argv, char ***v_sep)
     (*argv)[sep_count] = 0;
 }
 
-// command_name arg arg sep command_name arg arg
-
 void parse_command(char *line, char ****t_argv, char ***t_sep)
 {
     size_t i;
@@ -69,12 +67,12 @@ void parse_command(char *line, char ****t_argv, char ***t_sep)
     argv[j] = ft_strsplit(line + st, ' ');
 }
 
-void parse_line(char *line, char ***env)
+void parse_line(char *line)
 {
     char ***argv;
     char **v_sep;
 
     allocate_memory(line, &argv, &v_sep);
     parse_command(line, &argv, &v_sep);
-    process_command(&argv, &v_sep, env);
+	process_command(&argv, &v_sep);
 }

@@ -12,51 +12,27 @@
 
 #include "minishell.h"
 
-static int get_env_len(char **env)
+void clear_env(void)
 {
-    int len;
-
-    len = -1;
-    while (env[++len])
-        ;
-    return len;
+	list_destroy(&l_env);
 }
 
-void clear_env(char ***env)
+void add_new_env(char *new_env)
 {
-    ft_strsplit_clear(*env);
+	list_push_back(&l_env, (void *)new_env, ft_strlen(new_env));
 }
 
-void create_env(char ***env)
+void init_env(char **env)
 {
-	char **e;
-    int i;
+	size_t i;
+	char *var_env;
 
-    if (!(e = (char **)malloc(sizeof(char *) * (get_env_len(*env) + 1))))
-        return ;
-
-	i = -1;
-	while ((*env)[++i])
-		e[i] = ft_strdup((*env)[i]);
-
-	e[i] = 0;
-	*env = e;
-}
-
-void add_new_env(char ***env, char *new_env)
-{
-    char **e;
-    int i;
-
-    if (!(e = (char **)malloc(sizeof(char *) * (get_env_len(*env) + 2))))
-        return ;
-
-    i = -1;
-    while ((*env)[++i])
-        e[i] = ft_strdup((*env)[i]);
-
-    clear_env(env);
-    e[i] = ft_strdup(new_env);
-    e[i + 1] = 0;
-    *env = e;
+	i = 0;
+	while (env[i])
+	{
+		var_env = ft_strdup(env[i]);
+		list_push_back(&l_env, (void *)var_env, ft_strlen(var_env));
+		ft_memdel((void **)&var_env);
+		i++;
+	}
 }

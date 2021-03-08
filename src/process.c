@@ -12,11 +12,10 @@
 
 #include "minishell.h"
 
-void execute_command(char **argv, char **env, int fd)
+void execute_command(char **argv, int fd)
 {
     pid_t child_pid;
 
-    (void)env;
     child_pid = fork();
     if (child_pid == 0)
     {
@@ -33,12 +32,11 @@ void execute_command(char **argv, char **env, int fd)
         wait(&child_pid);
 }
 
-void execute_command_with_pipe(char **argv1, char **argv2, char **env)
+void execute_command_with_pipe(char **argv1, char **argv2)
 {
     int fd[2];
-    pid_t child_pid;
-
-    (void)env;
+	int status;
+	pid_t child_pid;
 
     if (pipe(fd) == -1)
     {
@@ -86,23 +84,22 @@ void execute_command_with_pipe(char **argv1, char **argv2, char **env)
         close(fd[0]);
         close(fd[1]);
 
-        int status;
         waitpid(child_pid, &status, 0);
     }
 }
-void search_command(char **argv, char ***env, int fd)
+void search_command(char **argv, int fd)
 {
     int i;
 
     if ((i = search_cmd(argv[0], cmd)) != -1)
-        cmd_func[i](argv, *env, fd);
-    else if (cmd_setenv(argv, env, fd))
+		cmd_func[i](argv, fd);
+	else if (cmd_setenv(argv, fd))
         ;
     else
-        execute_command(argv, *env, fd);
+		execute_command(argv, fd);
 }
 
-void process_command(char ****t_argv, char ***t_sep, char ***env)
+void process_command(char ****t_argv, char ***t_sep)
 {
     int fd;
     int first_command;
@@ -135,7 +132,7 @@ void process_command(char ****t_argv, char ***t_sep, char ***env)
 
             if (index_command == SEP_PIPE)
             {
-                execute_command_with_pipe(argv[first_command], argv[second_command], *env);
+				execute_command_with_pipe(argv[first_command], argv[second_command]);
                 ft_strsplit_clear(argv[first_command]);
                 ft_strsplit_clear(argv[second_command]);
 
@@ -154,7 +151,7 @@ void process_command(char ****t_argv, char ***t_sep, char ***env)
                 index_command = SEP_NOTHING;
         }
 
-        search_command(argv[first_command], env, fd);
+		search_command(argv[first_command], fd);
         ft_strsplit_clear(argv[first_command]);
         if (fd != STDOUT_FILENO)
             close(fd);

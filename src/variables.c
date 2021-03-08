@@ -26,7 +26,7 @@ char *cmd[] = {
   	NULL
 };
 
-void (*cmd_func[])(char **argv, char **env, int fd) = {
+void (*cmd_func[])(char **argv, int fd) = {
     &cmd_cd,
     &cmd_env,
     &cmd_help,

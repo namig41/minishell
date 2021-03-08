@@ -45,6 +45,6 @@ int search_cmd(char *cmd_name, char **cmd_arr)
 int is_sep(char *line, char **cmd_sep)
 {
     if (ft_isalnum(*line) || ft_isescape(*line))
-        return -1;
+		return (-1);
     return (search_cmd(line, cmd_sep));
 }

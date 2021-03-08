@@ -14,9 +14,9 @@
 
 int 	offset_path(char **cur)
 {
-    int count;
-    char *path;
-    int i;
+	int i;
+	int count;
+	char *path;
 
     i = 0;
     count = 3;
@@ -29,7 +29,7 @@ int 	offset_path(char **cur)
            break;
         i++;
     }
-    return i;
+	return (i);
 }
 
 void	print_prompt(void)

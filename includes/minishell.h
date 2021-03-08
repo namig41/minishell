@@ -54,6 +54,8 @@ void 	minishell(void);
 void	init_env(char **env);
 void	add_new_env(char *new_env);
 void 	clear_env(void);
+char	*get_env(const char *env_name);
+void 	erase_env(const char *env_name);
 
 /*
 ** ---------------------- PROCESS COMMAND ---------------------------

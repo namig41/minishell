@@ -15,8 +15,11 @@
 void cmd_unset(char **argv, int fd)
 {
 	if (!argv[1] || argv[2])
+	{
+		ft_puterror("unset: arg error");
 		return ;
+	}
 
 	(void)fd;
-	list_erase(&l_env, (void *)argv[1]);
+	erase_env(argv[1]);
 }

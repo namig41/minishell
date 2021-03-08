@@ -18,7 +18,7 @@ void 	cmd_cd(char **argv, int fd)
     char *new_path;
 
     (void)fd;
-    home_path = getenv("HOME");
+	home_path = get_env("HOME");
     if (!argv[1])
         new_path = home_path;
     else
@@ -26,7 +26,7 @@ void 	cmd_cd(char **argv, int fd)
         if (ft_strequ(argv[1], "--"))
             new_path = home_path;
         else if (argv[1][0] == '-' && !argv[1][2])
-            new_path = getenv("OLDPWD");
+			new_path = get_env("OLDPWD");
         else
             new_path = argv[1];
     }

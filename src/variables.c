@@ -22,6 +22,7 @@ char *cmd[] = {
 	"clear",
 	"echo",
     "eval",
+	"unset",
 	"exit",
   	NULL
 };
@@ -34,6 +35,7 @@ void (*cmd_func[])(char **argv, int fd) = {
     &cmd_clear,
     &cmd_echo,
     &cmd_eval,
+	&cmd_unset,
     &cmd_exit,
     NULL
 };

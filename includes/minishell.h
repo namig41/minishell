@@ -76,6 +76,7 @@ void 	cmd_exit(char **argv, int fd);
 void 	cmd_clear(char **argv, int fd);
 void 	cmd_echo(char **argv, int fd);
 void	cmd_eval(char **argv, int fd);
+void 	cmd_unset(char **argv, int fd);
 int 	cmd_setenv(char **argv, int fd);
 
 /*

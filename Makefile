@@ -29,7 +29,8 @@ FILE_BUILTINS 	= \
 					cmd_clear \
 					cmd_echo \
 					cmd_setenv \
-					cmd_eval
+					cmd_eval \
+					cmd_unset
 
 DIR_SRC			= ./src/
 DIR_BUILT 		= ./src/builtins/

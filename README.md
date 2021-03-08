@@ -15,6 +15,7 @@
 - You must implement a series of builtins:
   - `cd`
   - `setenv`
+  - `unset`
   - `help`
   - `pwd`
   - `clear`

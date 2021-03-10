@@ -36,10 +36,7 @@ int 	cmd_setenv(char **argv, int fd)
 			i++;
 		}
 		if (assig == -1 || assig == 0 || assig == i)
-		{
-			ft_puterror("setenv: arg error");
 			return (0);
-		}
 		add_new_env(argv[0]);
 	}
 	return (1);

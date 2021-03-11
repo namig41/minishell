@@ -24,7 +24,7 @@ void 	signal_init(void)
 void 	signal_handler(int sig)
 {
     if (sig == SIGINT || sig == SIGQUIT)
-		cmd_echo(0, 0);
+		cmd_exit(0, 0);
     else if (sig == SIGSTOP)
         g_signal_flag_run = 0;
     else if (sig == SIGCONT)
